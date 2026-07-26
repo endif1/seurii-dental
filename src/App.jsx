@@ -38,6 +38,15 @@ export default function App() {
   const [menu, setMenu] = useState(false)
   const [faqIdx, setFaqIdx] = useState(null)
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('is-visible')),
+      { threshold: 0.12 }
+    )
+    document.querySelectorAll('.reveal').forEach(element => observer.observe(element))
+    return () => observer.disconnect()
+  }, [])
+
   const go = (id) => {
     setMenu(false)
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -82,7 +91,7 @@ export default function App() {
       </section>
 
       {/* Services */}
-      <section className="section" id="layanan">
+      <section className="section reveal" id="layanan">
         <div className="container">
           <div className="section-label">Layanan</div>
           <h2 className="section-title">Perawatan gigi lengkap untuk Anda dan keluarga</h2>
@@ -100,7 +109,7 @@ export default function App() {
       </section>
 
       {/* Values */}
-      <section className="section" style={{ background: 'var(--warm-50)' }}>
+      <section className="section reveal" style={{ background: 'var(--warm-50)' }}>
         <div className="container">
           <div className="section-label">Mengapa Seurii</div>
           <h2 className="section-title">Klinik gigi yang nyaman dan terpercaya</h2>
@@ -117,7 +126,7 @@ export default function App() {
       </section>
 
       {/* How it works */}
-      <section className="section" id="tentang">
+      <section className="section reveal" id="tentang">
         <div className="container">
           <div className="section-label">Cara Booking</div>
           <h2 className="section-title">Mudah dari awal sampai akhir</h2>
@@ -134,14 +143,14 @@ export default function App() {
       </section>
 
       {/* Location + Booking */}
-      <section className="section" style={{ background: 'var(--warm-50)' }} id="lokasi">
+      <section className="section reveal" style={{ background: 'var(--warm-50)' }} id="lokasi">
         <div className="container">
           <div className="section-label">Kontak</div>
           <h2 className="section-title">Hubungi Seurii Dental</h2>
           <div className="contact-grid" style={{ marginTop: '2rem' }}>
             <div>
               <div className="info-label">Alamat</div>
-              <div className="info-value">Ruko Bintaro Jaya X9 Blok A No. 5<br /><span class="small">Bintaro, Tangerang Selatan 15224</span></div>
+              <div className="info-value">Ruko Bintaro Jaya X9 Blok A No. 5<br /><span className="small">Bintaro, Tangerang Selatan 15224</span></div>
 
               <div className="info-label">Telepon / WhatsApp</div>
               <div className="info-value"><a href={WA_BASE} target="_blank" rel="noopener">{TEL}</a></div>
@@ -194,7 +203,7 @@ export default function App() {
       </section>
 
       {/* FAQ */}
-      <section className="section" id="faq">
+      <section className="section reveal" id="faq">
         <div className="container">
           <div className="section-label">FAQ</div>
           <h2 className="section-title">Pertanyaan umum</h2>
@@ -213,7 +222,7 @@ export default function App() {
       </section>
 
       {/* CTA */}
-      <section className="cta">
+      <section className="cta reveal">
         <div className="container">
           <h2>Jaga kesehatan gigi keluarga bersama Seurii Dental</h2>
           <p>Konsultasi gratis. Booking via WhatsApp atau telepon langsung.</p>
